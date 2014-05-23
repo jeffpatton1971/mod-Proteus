@@ -129,6 +129,18 @@
                 throw ex;
             }
         }
+        public static string GetNextIp4Address(NetworkCredential Credential, string wsdlPath, long NetworkID)
+        {
+            try
+            {
+                ProteusAPI proxy = Connect(Credential, wsdlPath);
+                return proxy.getNextAvailableIP4Address(NetworkID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private static APIEntity[] GetObjects(ProteusAPI wsdlProxy, string keyword, string type, int start, int count)
         {
             APIEntity[] entities = wsdlProxy.searchByObjectTypes(keyword, type, start, count);

@@ -8,6 +8,7 @@
     using System.Net;
     using System.Web.Services;
     using ipam;
+    using LukeSkywalker.IPNetwork;
     public class Proteus
     {
         public class ObjectTypes

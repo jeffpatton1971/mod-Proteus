@@ -109,6 +109,13 @@
                 return null;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Credential"></param>
+        /// <param name="wsdlPath"></param>
+        /// <param name="NetworkIdentity"></param>
+        /// <returns></returns>
         public static APIEntity GetIp4Network(NetworkCredential Credential, string wsdlPath, string NetworkIdentity)
         {
             try
@@ -129,6 +136,42 @@
                 throw ex;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Credential"></param>
+        /// <param name="wsdlPath"></param>
+        /// <param name="View"></param>
+        /// <param name="Parent"></param>
+        /// <returns></returns>
+        public static APIEntity GetDnsView(NetworkCredential Credential, string wsdlPath, string View, string Parent)
+        {
+            try
+            {
+                ProteusAPI proxy = Connect(Credential, wsdlPath);
+                APIEntity[] Views = GetObjects(proxy, View, ObjectTypes.View, 0, 100);
+                foreach (APIEntity dnsView in Views)
+                {
+                    APIEntity ParentView = proxy.getParent(dnsView.id);
+                    if (ParentView.name == Parent)
+                    {
+                        return ParentView;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Credential"></param>
+        /// <param name="wsdlPath"></param>
+        /// <param name="NetworkID"></param>
+        /// <returns></returns>
         public static string GetNextIp4Address(NetworkCredential Credential, string wsdlPath, long NetworkID)
         {
             try
@@ -141,6 +184,15 @@
                 throw ex;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wsdlProxy"></param>
+        /// <param name="keyword"></param>
+        /// <param name="type"></param>
+        /// <param name="start"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         private static APIEntity[] GetObjects(ProteusAPI wsdlProxy, string keyword, string type, int start, int count)
         {
             APIEntity[] entities = wsdlProxy.searchByObjectTypes(keyword, type, start, count);

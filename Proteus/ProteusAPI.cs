@@ -145,7 +145,7 @@
             IPNetwork vlan = ParseCidr(ipNetwork);
             ProteusAPI proxy = Connect(Credential, wsdlPath);
 
-            string ipAddress = proxy.getNextAvailableIP4Address(ipNetwork.id);
+            string ipAddress = GetNextIp4Address(Credential, wsdlPath, ipNetwork.id);
             if (ipAddress == "")
             {
                 //
@@ -158,18 +158,11 @@
             {
                 ipStack.ipaddress = ipAddress;
             }
-            //
-            // Get the subnet and gateway
-            //
             ipStack.netmask = vlan.Netmask.ToString();
             ipStack.gateway = vlan.LastUsable.ToString();
-            //
-            // Assign hostname and suffix
-            //
             ipStack.hostname = Hostname;
             ipStack.suffix = Suffix;
             ipStack.fqdn = Hostname + "." + Suffix;
-
             return ipStack;
         }
         /// <summary>

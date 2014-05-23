@@ -84,6 +84,8 @@
             public string gateway { get; set; }
             public string hostname { get; set; }
             public string suffix { get; set; }
+            public string fqdn { get; set; }
+            public long dnsViewid { get; set; }
         }
         /// <summary>
         /// 
@@ -136,6 +138,39 @@
             {
                 throw ex;
             }
+        }
+        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, APIEntity ipNetwork, string Hostname, string Suffix)
+        {
+            VirtualIPStack ipStack = new VirtualIPStack();
+            IPNetwork vlan = ParseCidr(ipNetwork);
+            ProteusAPI proxy = Connect(Credential, wsdlPath);
+
+            string ipAddress = proxy.getNextAvailableIP4Address(ipNetwork.id);
+            if (ipAddress == "")
+            {
+                //
+                // ZOMG network is full
+                //
+                // we need to quit now
+                //
+            }
+            else
+            {
+                ipStack.ipaddress = ipAddress;
+            }
+            //
+            // Get the subnet and gateway
+            //
+            ipStack.netmask = vlan.Netmask.ToString();
+            ipStack.gateway = vlan.LastUsable.ToString();
+            //
+            // Assign hostname and suffix
+            //
+            ipStack.hostname = Hostname;
+            ipStack.suffix = Suffix;
+            ipStack.fqdn = Hostname + "." + Suffix;
+
+            return ipStack;
         }
         /// <summary>
         /// 
@@ -222,6 +257,21 @@
         {
             APIEntity[] entities = wsdlProxy.searchByObjectTypes(keyword, type, start, count);
             return entities;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Ip4Network"></param>
+        /// <returns></returns>
+        private static IPNetwork ParseCidr(APIEntity Ip4Network)
+        {
+
+            char[] splitChar = { '|' };
+            string[] PropertyArray = Ip4Network.properties.Split(splitChar);
+            string[] CIDRArray = Array.FindAll(PropertyArray, s => s.Contains("CIDR"));
+            string CIDRNotation = CIDRArray[0].Replace("CIDR=", "");
+            IPNetwork vlan = IPNetwork.Parse(CIDRNotation);
+            return vlan;
         }
     }
 }

@@ -188,6 +188,30 @@
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="Credential"></param>
+        /// <param name="wsdlPath"></param>
+        /// <param name="DnsViewID"></param>
+        /// <param name="IpStack"></param>
+        /// <param name="TTL"></param>
+        /// <param name="Comments"></param>
+        /// <returns></returns>
+        public static long AddHostRecord(NetworkCredential Credential, string wsdlPath, long DnsViewID, VirtualIPStack IpStack, int TTL, string Comments)
+        {
+            try
+            {
+                ProteusAPI proxy = Connect(Credential, wsdlPath);
+                string AbsoluteName = IpStack.hostname + "." + IpStack.suffix;
+                long HostID = proxy.addHostRecord(DnsViewID, AbsoluteName, IpStack.ipaddress, TTL, Comments);
+                return HostID;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="wsdlProxy"></param>
         /// <param name="keyword"></param>
         /// <param name="type"></param>

@@ -234,6 +234,23 @@
             }
             catch (Exception ex)
             {
+                if (ex.Message == "Duplicate of another item")
+                {
+                    //
+                    // Find out who has my information
+                    //
+                    ProteusAPI proxy = Connect(Credential, wsdlPath);
+                    APIEntity[] DupeIps = proxy.searchByObjectTypes(IpStack.ipaddress, ObjectTypes.IP4Address, 0, 10);
+                    APIEntity[] DupeNames = proxy.searchByObjectTypes(IpStack.hostname, ObjectTypes.HostRecord, 0, 10);
+                    if (DupeIps.Count<APIEntity>() > 0)
+                    {
+                        Console.WriteLine("Duplicate IP");
+                    }
+                    if (DupeNames.Count<APIEntity>() > 0)
+                    {
+                        Console.WriteLine("Duplicate Name");
+                    }
+                }
                 throw ex;
             }
         }

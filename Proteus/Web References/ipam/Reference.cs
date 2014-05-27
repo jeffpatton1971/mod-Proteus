@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Proteus.ipam {
+namespace mod_proteus.ipam {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -387,7 +387,7 @@ namespace Proteus.ipam {
         
         /// <remarks/>
         public ProteusAPI() {
-            this.Url = global::Proteus.Properties.Settings.Default.Proteus_ipam_ProteusAPI;
+            this.Url = global::mod_proteus.Properties.Settings.Default.Proteus_ipam_ProteusAPI;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

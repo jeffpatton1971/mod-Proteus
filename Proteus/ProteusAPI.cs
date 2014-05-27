@@ -1,4 +1,4 @@
-﻿namespace Proteus
+﻿namespace mod_proteus
 {
     using System;
     using System.Collections.Generic;

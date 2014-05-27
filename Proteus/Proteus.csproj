@@ -7,7 +7,7 @@
     <ProjectGuid>{CDCDBF75-FE12-4CF1-B440-18178E03C004}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Proteus</RootNamespace>
+    <RootNamespace>mod_proteus</RootNamespace>
     <AssemblyName>Proteus</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -83,19 +83,19 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\ipam\APIAccessRight.datasource">
+    <None Include="Web References\ipam\APIAccessRight1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ipam\APIDeploymentOption.datasource">
+    <None Include="Web References\ipam\APIDeploymentOption1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ipam\APIDeploymentRole.datasource">
+    <None Include="Web References\ipam\APIDeploymentRole1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ipam\APIEntity.datasource">
+    <None Include="Web References\ipam\APIEntity1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\ipam\APIUserDefinedField.datasource">
+    <None Include="Web References\ipam\APIUserDefinedField1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\ipam\ProteusAPI.wsdl" />

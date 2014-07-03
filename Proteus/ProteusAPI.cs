@@ -184,7 +184,7 @@
                     APIEntity ParentView = proxy.getParent(dnsView.id);
                     if (ParentView.name == Parent)
                     {
-                        return ParentView;
+                        return dnsView;
                     }
                 }
                 return null;

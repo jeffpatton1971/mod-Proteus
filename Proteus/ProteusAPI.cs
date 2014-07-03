@@ -218,17 +218,18 @@
         /// </summary>
         /// <param name="Credential"></param>
         /// <param name="wsdlPath"></param>
-        /// <param name="DnsViewID"></param>
+        /// <param name="DnsView"></param>
         /// <param name="IpStack"></param>
         /// <param name="TTL"></param>
         /// <param name="Comments"></param>
         /// <returns></returns>
-        public static long AddHostRecord(NetworkCredential Credential, string wsdlPath, long DnsViewID, VirtualIPStack IpStack, int TTL, string Comments)
+        public static long AddHostRecord(NetworkCredential Credential, string wsdlPath, APIEntity DnsView, VirtualIPStack IpStack, int TTL, string Comments)
         {
             try
             {
                 ProteusAPI proxy = Connect(Credential, wsdlPath);
                 string AbsoluteName = IpStack.hostname + "." + IpStack.suffix;
+                long DnsViewID = DnsView.id;
                 long HostID = proxy.addHostRecord(DnsViewID, AbsoluteName, IpStack.ipaddress, TTL, Comments);
                 return HostID;
             }

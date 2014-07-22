@@ -139,9 +139,10 @@
                 throw ex;
             }
         }
-        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, APIEntity ipNetwork, string Hostname, string Suffix)
+        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, string Keyword)
         {
             VirtualIPStack ipStack = new VirtualIPStack();
+            APIEntity ipNetwork = GetIp4Network(Credential, wsdlPath, Keyword);
             IPNetwork vlan = ParseCidr(ipNetwork);
             ProteusAPI proxy = Connect(Credential, wsdlPath);
 
@@ -160,9 +161,6 @@
             }
             ipStack.netmask = vlan.Netmask.ToString();
             ipStack.gateway = vlan.LastUsable.ToString();
-            ipStack.hostname = Hostname;
-            ipStack.suffix = Suffix;
-            ipStack.fqdn = Hostname + "." + Suffix;
             return ipStack;
         }
         /// <summary>

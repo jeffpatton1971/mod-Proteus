@@ -272,7 +272,7 @@
         /// </summary>
         /// <param name="Ip4Network"></param>
         /// <returns></returns>
-        private static IPNetwork ParseCidr(APIEntity Ip4Network)
+        private static  IPNetwork ParseCidr(APIEntity Ip4Network)
         {
 
             char[] splitChar = { '|' };

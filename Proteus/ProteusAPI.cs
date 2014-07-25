@@ -229,7 +229,7 @@
                 string AbsoluteName = IpStack.hostname + "." + IpStack.suffix;
                 APIEntity DnsView = GetDnsView(Credential, wsdlPath, View, Parent);
                 long DnsViewID = DnsView.id;
-                long HostID = proxy.addHostRecord(DnsViewID, AbsoluteName, IpStack.ipaddress, TTL, Comments);
+                long HostID = proxy.addHostRecord(DnsViewID, AbsoluteName, IpStack.ipaddress, TTL, null);
                 return HostID;
             }
             catch (Exception ex)

@@ -2,14 +2,6 @@
 <definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://api.proteus.bluecatnetworks.com" xmlns:ns1="http://jaxb.dev.java.net/array" name="ProteusAPI" targetNamespace="http://api.proteus.bluecatnetworks.com" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <xs:schema targetNamespace="http://api.proteus.bluecatnetworks.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:complexType name="APIEntity">
-        <xs:sequence>
-          <xs:element name="id" type="xs:long" />
-          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="properties" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:complexType>
       <xs:complexType name="APIDeploymentOption">
         <xs:sequence>
           <xs:element name="id" type="xs:long" />
@@ -19,17 +11,12 @@
           <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="APIUserDefinedField">
+      <xs:complexType name="APIEntity">
         <xs:sequence>
-          <xs:element minOccurs="0" name="defaultValue" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="displayName" type="xs:string" />
-          <xs:element name="hideFromSearch" type="xs:boolean" />
-          <xs:element minOccurs="0" name="name" type="xs:string" />
-          <xs:element minOccurs="0" name="predefinedValues" nillable="true" type="xs:string" />
-          <xs:element name="renderAsRadioButton" type="xs:boolean" />
-          <xs:element name="required" type="xs:boolean" />
-          <xs:element minOccurs="0" name="type" type="xs:string" />
-          <xs:element minOccurs="0" name="validatorProperties" nillable="true" type="xs:string" />
+          <xs:element name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="properties" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="APIAccessRight">
@@ -51,9 +38,17 @@
           <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="APIEntityArray" final="#all">
+      <xs:complexType name="APIUserDefinedField">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIEntity" />
+          <xs:element minOccurs="0" name="defaultValue" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="displayName" type="xs:string" />
+          <xs:element name="hideFromSearch" type="xs:boolean" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="predefinedValues" nillable="true" type="xs:string" />
+          <xs:element name="renderAsRadioButton" type="xs:boolean" />
+          <xs:element name="required" type="xs:boolean" />
+          <xs:element minOccurs="0" name="type" type="xs:string" />
+          <xs:element minOccurs="0" name="validatorProperties" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="APIDeploymentOptionArray" final="#all">
@@ -61,9 +56,9 @@
           <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIDeploymentOption" />
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="APIUserDefinedFieldArray" final="#all">
+      <xs:complexType name="APIEntityArray" final="#all">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIUserDefinedField" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIEntity" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="APIAccessRightArray" final="#all">
@@ -74,6 +69,11 @@
       <xs:complexType name="APIDeploymentRoleArray" final="#all">
         <xs:sequence>
           <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIDeploymentRole" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="APIUserDefinedFieldArray" final="#all">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" nillable="true" type="tns:APIUserDefinedField" />
         </xs:sequence>
       </xs:complexType>
     </xs:schema>

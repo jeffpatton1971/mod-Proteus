@@ -171,7 +171,7 @@
             ProteusAPI proxy = Connect(Credential, wsdlPath);
             APIEntity ipNetwork = GetIp4Network(proxy, EntityName, EntityId);
             IPNetwork vlan = ParseCidr(ipNetwork);
-            string ipAddress = GetNextIp4Address(Credential, wsdlPath, ipNetwork.id);
+            string ipAddress = GetNextIp4Address(proxy, ipNetwork.id);
             if (ipAddress == "")
             {
                 //
@@ -230,6 +230,17 @@
             {
                 ProteusAPI proxy = Connect(Credential, wsdlPath);
                 return proxy.getNextAvailableIP4Address(NetworkID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static string GetNextIp4Address(ProteusAPI Proxy, long NetworkID)
+        {
+            try
+            {
+                return Proxy.getNextAvailableIP4Address(NetworkID);
             }
             catch (Exception ex)
             {

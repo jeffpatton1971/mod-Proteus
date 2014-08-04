@@ -169,7 +169,7 @@
         {
             VirtualIPStack ipStack = new VirtualIPStack();
             ProteusAPI proxy = Connect(Credential, wsdlPath);
-            APIEntity ipNetwork = GetIp4Network(proxy, EntityName, EntityId);
+            APIEntity ipNetwork = GetIp4Network(proxy, EntityId);
             IPNetwork vlan = ParseCidr(ipNetwork);
             string ipAddress = GetNextIp4Address(Credential, wsdlPath, ipNetwork.id);
             if (ipAddress == "")

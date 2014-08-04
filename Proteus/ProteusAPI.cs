@@ -139,13 +139,25 @@
                 throw ex;
             }
         }
-        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, string Keyword)
+        public static APIEntity GetIp4Network(ProteusAPI wsdlProxy, long EntityId)
+        {
+            APIEntity Entity = null;
+            try
+            {
+                Entity = wsdlProxy.getEntityById(EntityId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Entity;
+        }
+        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, long EntityId)
         {
             VirtualIPStack ipStack = new VirtualIPStack();
-            APIEntity ipNetwork = GetIp4Network(Credential, wsdlPath, Keyword);
-            IPNetwork vlan = ParseCidr(ipNetwork);
             ProteusAPI proxy = Connect(Credential, wsdlPath);
-
+            APIEntity ipNetwork = GetIp4Network(proxy, EntityId);
+            IPNetwork vlan = ParseCidr(ipNetwork);
             string ipAddress = GetNextIp4Address(Credential, wsdlPath, ipNetwork.id);
             if (ipAddress == "")
             {

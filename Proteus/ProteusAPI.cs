@@ -103,7 +103,6 @@
                 ipam.CookieContainer = new CookieContainer();
                 ipam.Url = wsdlPath;
                 ipam.login(Username, Password);
-                Console.WriteLine(ipam.getSystemInfo());
                 return ipam;
             }
             catch (Exception ex)
@@ -152,11 +151,25 @@
             }
             return Entity;
         }
-        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, long EntityId)
+        public static APIEntity GetIp4Network(ProteusAPI wsdProxy, string Name, long EntityId)
+        {
+            APIEntity Entity = null;
+            try
+            {
+                APIEntity Parent = wsdProxy.getParent(EntityId);
+                Entity = wsdProxy.getEntityByName(Parent.id, Name, ObjectTypes.IP4Network);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Entity;
+        }
+        public static VirtualIPStack GetIpStack(NetworkCredential Credential, string wsdlPath, long EntityId, string EntityName)
         {
             VirtualIPStack ipStack = new VirtualIPStack();
             ProteusAPI proxy = Connect(Credential, wsdlPath);
-            APIEntity ipNetwork = GetIp4Network(proxy, EntityId);
+            APIEntity ipNetwork = GetIp4Network(proxy, EntityName, EntityId);
             IPNetwork vlan = ParseCidr(ipNetwork);
             string ipAddress = GetNextIp4Address(Credential, wsdlPath, ipNetwork.id);
             if (ipAddress == "")

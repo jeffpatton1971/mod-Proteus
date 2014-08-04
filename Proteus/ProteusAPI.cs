@@ -186,6 +186,7 @@
             }
             ipStack.netmask = vlan.Netmask.ToString();
             ipStack.gateway = vlan.LastUsable.ToString();
+            proxy.logout();
             return ipStack;
         }
         /// <summary>
@@ -205,6 +206,26 @@
                 foreach (APIEntity dnsView in Views)
                 {
                     APIEntity ParentView = proxy.getParent(dnsView.id);
+                    if (ParentView.name == Parent)
+                    {
+                        return dnsView;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static APIEntity GetDnsView(ProteusAPI Proxy, string View, string Parent)
+        {
+            try
+            {
+                APIEntity[] Views = GetObjects(Proxy, View, ObjectTypes.View, 0, 100);
+                foreach (APIEntity dnsView in Views)
+                {
+                    APIEntity ParentView = Proxy.getParent(dnsView.id);
                     if (ParentView.name == Parent)
                     {
                         return dnsView;
@@ -263,9 +284,10 @@
             {
                 ProteusAPI proxy = Connect(Credential, wsdlPath);
                 string AbsoluteName = IpStack.hostname + "." + IpStack.suffix;
-                APIEntity DnsView = GetDnsView(Credential, wsdlPath, View, Parent);
+                APIEntity DnsView = GetDnsView(proxy, View, Parent);
                 long DnsViewID = DnsView.id;
                 long HostID = proxy.addHostRecord(DnsViewID, AbsoluteName, IpStack.ipaddress, TTL, Comments);
+                proxy.logout();
                 return HostID;
             }
             catch (Exception ex)
